@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Grocery Items
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Item Name</ion-label>
+      <ion-input type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item Price</ion-label>
+      <ion-input #priceInput [formControl]="priceForm" [(ngModel)]="price" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Item Quantity</ion-label>
+      <ion-input type="number" [(ngModel)]="quantity" ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button color="primary" (click)="AddItem()">Add Item</button>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let i of getItems(); let idx = index">
+      <ion-item>
+          <p style="display: inline-block;"><span ion-text color="dark">
+            Item Order:
+          </span>{{idx + 1}} ***</p>
+          <p style="display: inline-block;"><span ion-text color="dark">
+            Item Name:
+          </span>{{i.name}} ***</p>
+          <p style="display: inline-block;"><span ion-text color="dark">
+            Item Price:
+          </span>{{i.price}} ***</p>
+          <p style="display: inline-block;"><span ion-text color="dark">
+            Item Quantity:
+          </span>{{i.quantity}}</p>
+      </ion-item>
+
+      <ion-item-options side="right">
+          <button ion-button color="secondary" (click)="modifyItem(i, idx)">
+            <ion-icon name="more"></ion-icon> Edit
+          </button>
+          <button ion-button color="primary" (click)="shareItem(i, idx)">
+            <ion-icon name="ios-share"></ion-icon> Share
+          </button>
+          <button ion-button color="danger" (click)="deleteItem(i, idx)">
+              <ion-icon name="trash"></ion-icon> Delete
+          </button>
+      </ion-item-options>
+  </ion-item-sliding>
+  </ion-list>
+  
+  <ion-list>
+    <ion-item>
+      <ion-label></ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
